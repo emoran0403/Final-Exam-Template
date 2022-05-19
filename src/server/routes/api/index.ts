@@ -4,8 +4,10 @@ import categoryRouter from "./CategoryRoutes";
 
 const apiRouter = express.Router();
 
+// current route is "/api"
+
 apiRouter.use("/books", bookRouter);
-apiRouter.use("/category", categoryRouter);
+apiRouter.use("/categories", categoryRouter);
 
 export default apiRouter;
 
