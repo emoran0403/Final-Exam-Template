@@ -1,6 +1,7 @@
 // This is where I define the Types used in the project
 // I can fill these in before the exam
 
+import { OkPacket } from "mysql";
 export interface Category {
   id: number;
   name: string;
@@ -8,11 +9,10 @@ export interface Category {
 
 export interface Book {
   id: number;
-  categoryid: number;
-  categoryname: string;
   title: string;
   author: string;
   price: number;
+  categoryname: string;
 }
 
 export interface User {
@@ -27,4 +27,9 @@ export interface NewBookInfo {
   author: string;
   price: number;
   categoryid: number;
+}
+
+export interface SP_Return {
+  data: Category[] | Book[] | User[];
+  OkPacket: OkPacket;
 }

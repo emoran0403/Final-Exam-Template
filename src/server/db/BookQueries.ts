@@ -1,11 +1,16 @@
 import { Query } from ".";
 import * as Types from "../../types";
 
-const getSingleBook = () => Query<Types.Book[]>(`SELECT * FROM Books`);
-const getAllBooks = (id: number) => Query<Types.Book[]>(`SELECT * FROM Books WHERE id = ?`, [id]);
-const createBook = (newBookInfo: Types.NewBookInfo) => Query(`INSERT INTO Books SET ?`, [newBookInfo]);
-const updateBook = (id: number, newBookInfo: Types.NewBookInfo) => Query(`UPDATE Books SET ? WHERE id = ?`, [newBookInfo, id]);
-const deleteBook = (id: number) => Query(`DELETE FROM Books WHERE id = ?`, [id]);
+const getAllBooks = async () => (await Query<Types.SP_Return>(`CALL getAllBooks();`))[0];
+
+const getSingleBook = async (id: number) => (await Query<Types.SP_Return>(`CALL getSingleBook(?);`, [id]))[0];
+
+const createBook = async (newBookInfo: Types.NewBookInfo) => (await Query(`INSERT INTO Books SET ?`, [newBookInfo]))[0];
+
+const updateBook = async (id: number, newBookInfo: Types.NewBookInfo) =>
+  (await Query(`UPDATE Books SET ? WHERE id = ?`, [newBookInfo, id]))[0];
+
+const deleteBook = async (id: number) => (await Query(`CALL deleteBook(?);`, [id]))[0];
 
 export default {
   getSingleBook,

@@ -1,4 +1,5 @@
 import * as express from "express";
+import * as DB from "../../db";
 
 const bookRouter = express.Router();
 
@@ -7,7 +8,7 @@ const bookRouter = express.Router();
 // get all books
 bookRouter.get("/", async (req, res, next) => {
   try {
-    const data = "await db.Books.getallbooks()";
+    const data = await DB.Books.getAllBooks;
     res.status(200).json(data);
   } catch (error) {
     console.log(`get all books error...\m`);
@@ -18,7 +19,15 @@ bookRouter.get("/", async (req, res, next) => {
 
 // get single book
 bookRouter.get("/:id", async (req, res, next) => {
-  res.status(123456789).json({ message: `my message here` });
+  const id = req.params.id;
+  try {
+    const data = await DB.Books.getSingleBook(Number(id));
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(`get all books error...\m`);
+    console.error(error);
+    res.status(404).json({ message: `my message here` });
+  }
 });
 
 //new book
