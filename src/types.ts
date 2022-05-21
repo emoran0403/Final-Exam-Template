@@ -3,32 +3,35 @@
 
 import { OkPacket } from "mysql";
 export interface Category {
-  id: number;
-  name: string;
+  id: number; // AUTO_INCREMENT
+  name: string; // varchar(50)
 }
 
 export interface Book {
-  id: number;
-  title: string;
-  author: string;
-  price: number;
-  categoryname: string;
+  id: number; // AUTO_INCREMENT
+  title: string; // varchar(100)
+  author: string; // varchar(100)
+  price: number; // decimal(5,2)
+  categoryname: string; // varchar(50)
 }
 
 export interface User {
-  id: number;
-  email: string;
-  role: string;
-  name: string;
+  id: number; // AUTO_INCREMENT
+  email: string; // varchar(60)
+  password?: string; // varchar(60)
+  role: string; // varchar(25)
+  name: string; // varchar(60)
 }
 
 export interface NewBookInfo {
-  title: string;
-  author: string;
-  price: number;
-  categoryid: number;
+  id?: number; // int(11)
+  title: string; // varchar(100)
+  author: string; // varchar(100)
+  price: number; // decimal(5,2)
+  categoryid: number; // int(11)
 }
 
+//! not quite sure on this guy
 export interface SP_Return {
   data: Category[] | Book[] | User[];
   OkPacket: OkPacket;

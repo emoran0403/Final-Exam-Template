@@ -19,5 +19,3 @@ export default {
   updateBook,
   deleteBook,
 };
-
-//! does delete book depend on the author?
