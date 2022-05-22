@@ -1,7 +1,8 @@
 import * as passport from "passport";
 import * as JWTStrategy from "passport-jwt";
-import * as LocalStrategy from "passport-local";
-import bcrypt from "bcrypt";
+import * as PassportLocal from "passport-local";
+import * as bcrypt from "bcrypt";
+import * as DB from "../db/index";
 
 interface User extends Express.User {
   id?: string;
@@ -9,35 +10,57 @@ interface User extends Express.User {
   password?: string;
 }
 
-passport.serializeUser((user: User) => {
+passport.serializeUser((user: User, done) => {
   if (user.password) delete user.password;
+  done(null, user);
 });
-
-passport.deserializeUser((user, done) => {
+passport.deserializeUser((user: User, done) => {
   done(null, user);
 });
 
 // Logging in
 passport.use(
-  new LocalStrategy.Strategy(
+  new PassportLocal.Strategy(
     {
       usernameField: "email",
     },
-    (email, pass, done) => {
+    async (email, password, done) => {
       try {
-        // get user from db
-        const [user] = [{ id: "", email: "", password: "" }];
-        if (bcrypt.compare(pass, user.password)) {
-          delete user.password;
-          done(null, user);
+        const [userFound] = await DB.Users.getSingleUserAUTH(email);
+        if (userFound && bcrypt.compare(password, userFound.password)) {
+          delete userFound.password;
+          done(null, userFound);
+        } else {
+          done(null, false);
         }
       } catch (error) {
         done(error);
-        done(null, false);
       }
     }
   )
 );
+
+// Logging in
+// passport.use(
+//   new LocalStrategy.Strategy(
+//     {
+//       usernameField: "email",
+//     },
+//     (email, pass, done) => {
+//       try {
+//         // get user from db
+//         const [user] = [{ id: "", email: "", password: "" }];
+//         if (bcrypt.compare(pass, user.password)) {
+//           delete user.password;
+//           done(null, user);
+//         }
+//       } catch (error) {
+//         done(error);
+//         done(null, false);
+//       }
+//     }
+//   )
+// );
 
 // Check token
 passport.use(

@@ -2,6 +2,8 @@
 // I can fill these in before the exam
 
 import { OkPacket } from "mysql";
+import { Request } from "express";
+
 export interface Category {
   id: number; // AUTO_INCREMENT
   name: string; // varchar(50)
@@ -15,12 +17,17 @@ export interface Book {
   categoryname: string; // varchar(50)
 }
 
+// All optional so that I use this to extend Request to make ReqUser
 export interface User {
-  id: number; // AUTO_INCREMENT
-  email: string; // varchar(60)
+  id?: number; // AUTO_INCREMENT
+  email?: string; // varchar(60)
   password?: string; // varchar(60)
-  role: string; // varchar(25)
-  name: string; // varchar(60)
+  role?: string; // varchar(25)
+  name?: string; // varchar(60)
+}
+
+export interface ReqUser extends Request {
+  user?: User;
 }
 
 export interface NewBookInfo {

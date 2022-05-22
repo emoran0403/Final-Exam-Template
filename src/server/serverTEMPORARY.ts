@@ -1,7 +1,12 @@
 import * as express from "express";
+import * as passport from "passport";
 import baseRouter from "./routes/index";
 
+import "./server_utils/JWTStrategies.ts";
+
 const app = express();
+
+app.use(passport.initialize()); // initialize passport so that we can use its middleware
 
 app.use(express.static("public")); // send public directory to client
 app.use(express.json()); // allows for req.body parsing

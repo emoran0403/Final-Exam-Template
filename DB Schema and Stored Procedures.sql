@@ -52,7 +52,7 @@ DELIMITER //
 DELIMITER ;
 */
 
-# getAllBooks() Created!
+# getAllBooks() Created! CALL getAllBooks();
 DELIMITER //
 	CREATE PROCEDURE getAllBooks()
 		BEGIN 
@@ -61,7 +61,7 @@ DELIMITER //
 		END //
 DELIMITER ;
 
-# getSingleBook() Created!
+# getSingleBook() Created!  CALL getSingleBook(?);
 DELIMITER //
 	CREATE PROCEDURE getSingleBook(queryID INT)
 		BEGIN 
@@ -71,7 +71,7 @@ DELIMITER //
 		END //
 DELIMITER ;
 
-# postNewBook Created!
+# postNewBook Created! CALL postNewBook 
 DELIMITER //
 	CREATE PROCEDURE postNewBook(IN new_categoryid INT(11), IN new_title VARCHAR(100), IN new_author VARCHAR(100), IN new_price DECIMAL(5,2))
 		BEGIN 
@@ -134,7 +134,7 @@ DELIMITER //
 		END //
 DELIMITER ;
 
-# getAllUsers() Created!
+# getAllUsers() Created! CALL getAllUSers();
 DELIMITER //
 	CREATE PROCEDURE getAllUsers()
 		BEGIN 
@@ -142,7 +142,7 @@ DELIMITER //
 		END //
 DELIMITER ;
 
-# getSingleUser() Created!
+# getSingleUser() Created! CALL getSingleUser(?);
 DELIMITER //
 	CREATE PROCEDURE getSingleUser(id int)
 		BEGIN
@@ -151,16 +151,16 @@ DELIMITER //
 		END //
 DELIMITER ;
 
-# getSingleUserAUTH() Created!
+# getSingleUserAUTH() Created! CALL getSingleUserAUTH(?);
 DELIMITER //
-	CREATE PROCEDURE getSingleUserAUTH(id int)
+	CREATE PROCEDURE getSingleUserAUTH(email VARCHAR(60))
 		BEGIN
 			SELECT u.id, u.email, u.role, u.name, u.password FROM Users u
-            WHERE u.id=id;
+            WHERE u.email=email;
 		END //
 DELIMITER ;
 
-# getAllCategories() Created!
+# getAllCategories() Created! CALL getAllCategories;
 DELIMITER //
 	CREATE PROCEDURE getAllCategories()
 		BEGIN
@@ -168,7 +168,7 @@ DELIMITER //
 		END //
 DELIMITER ;
 
-# getSingleCategory() Created!
+# getSingleCategory() Created! CALL getSingleCategory(?);
 DELIMITER //
 	CREATE PROCEDURE getSingleCategory(id int)
 		BEGIN
