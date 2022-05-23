@@ -17,6 +17,13 @@ export interface Book {
   categoryname: string; // varchar(50)
 }
 
+export interface NewBookInfo {
+  id?: number; // int(11)
+  title: string; // varchar(100)
+  author: string; // varchar(100)
+  price: number; // decimal(5,2)
+  categoryid: number; // int(11)
+}
 // All optional so that I use this to extend Request to make ReqUser
 export interface User {
   id?: number; // AUTO_INCREMENT
@@ -26,16 +33,21 @@ export interface User {
   name?: string; // varchar(60)
 }
 
-export interface ReqUser extends Request {
-  user?: User;
+export interface NewUserInfo {
+  email: string; // varchar(60)
+  password: string; // varchar(60)
+  name: string; // varchar(60)
 }
 
-export interface NewBookInfo {
-  id?: number; // int(11)
-  title: string; // varchar(100)
-  author: string; // varchar(100)
-  price: number; // decimal(5,2)
-  categoryid: number; // int(11)
+export interface Payload {
+  id: number;
+  email: string;
+  role: string;
+  name: string;
+}
+
+export interface ReqUser extends Request {
+  user?: User | Payload;
 }
 
 //! not quite sure on this guy

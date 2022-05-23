@@ -1,76 +1,57 @@
 import * as passport from "passport";
-import * as JWTStrategy from "passport-jwt";
+import * as PassportJWT from "passport-jwt";
 import * as PassportLocal from "passport-local";
-import * as bcrypt from "bcrypt";
 import * as DB from "../db/index";
+import * as Types from "../../types";
+import * as CONFIG from "../config";
+import { Application } from "express";
+import { compareHash } from "./Passwords";
 
-interface User extends Express.User {
-  id?: string;
-  email?: string;
-  password?: string;
-}
+export function configurePassport(app: Application) {
+  passport.serializeUser((user: Types.User, done) => {
+    if (user.password) delete user.password;
+    done(null, user);
+  });
 
-passport.serializeUser((user: User, done) => {
-  if (user.password) delete user.password;
-  done(null, user);
-});
-passport.deserializeUser((user: User, done) => {
-  done(null, user);
-});
+  passport.deserializeUser((user: Types.User, done) => {
+    done(null, user);
+  });
 
-// Logging in
-passport.use(
-  new PassportLocal.Strategy(
-    {
-      usernameField: "email",
-    },
-    async (email, password, done) => {
-      try {
-        const [userFound] = await DB.Users.getSingleUserAUTH(email);
-        if (userFound && bcrypt.compare(password, userFound.password)) {
-          delete userFound.password;
-          done(null, userFound);
-        } else {
-          done(null, false);
+  // Logging in => authenticate("local") Middleware
+  passport.use(
+    new PassportLocal.Strategy(
+      {
+        usernameField: "email",
+      },
+      async (email, password, done) => {
+        try {
+          const [userFound] = await DB.Users.getSingleUserAUTH(email);
+          if (userFound && compareHash(password, userFound.password)) {
+            delete userFound.password;
+            done(null, userFound);
+          } else {
+            done(null, false);
+          }
+        } catch (error) {
+          done(error);
         }
-      } catch (error) {
-        done(error);
       }
-    }
-  )
-);
+    )
+  );
 
-// Logging in
-// passport.use(
-//   new LocalStrategy.Strategy(
-//     {
-//       usernameField: "email",
-//     },
-//     (email, pass, done) => {
-//       try {
-//         // get user from db
-//         const [user] = [{ id: "", email: "", password: "" }];
-//         if (bcrypt.compare(pass, user.password)) {
-//           delete user.password;
-//           done(null, user);
-//         }
-//       } catch (error) {
-//         done(error);
-//         done(null, false);
-//       }
-//     }
-//   )
-// );
-
-// Check token
-passport.use(
-  new JWTStrategy.Strategy(
-    {
-      jwtFromRequest: JWTStrategy.ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "hunter2",
-    },
-    (payload, done) => {
-      done(null, payload);
-    }
-  )
-);
+  // Validate token => authenticate("jwt") Middleware to protect routes
+  passport.use(
+    new PassportJWT.Strategy(
+      {
+        jwtFromRequest: PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey: CONFIG.JWT_CONFIG.jwtSecretKey,
+      },
+      (payload: Types.Payload, done) => {
+        try {
+          done(null, payload);
+        } catch (error) {}
+      }
+    )
+  );
+  app.use(passport.initialize()); // initialize passport so that we can use its middleware
+}
