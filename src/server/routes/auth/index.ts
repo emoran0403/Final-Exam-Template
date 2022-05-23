@@ -11,7 +11,7 @@ const authRouter = express.Router();
 // current route is "/auth"
 
 // check if a token is valid
-authRouter.get("/", authenticate("jwt"), (req, res, next) => {
+authRouter.get("/verify", authenticate("jwt"), (req, res, next) => {
   res.status(200).json({ message: `Valid Token` });
 });
 
