@@ -1,7 +1,8 @@
+// server.ts - will need to make this live
 import * as express from "express";
 import baseRouter from "./routes/index";
 
-import { configurePassport } from "../server/server_utils/JWTStrategies";
+import { configurePassport } from "./server_utils/JWTStrategies";
 
 const app = express();
 

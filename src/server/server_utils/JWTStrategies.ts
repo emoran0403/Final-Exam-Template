@@ -1,3 +1,4 @@
+// JWTStrategies
 import * as passport from "passport";
 import * as PassportJWT from "passport-jwt";
 import * as PassportLocal from "passport-local";
@@ -22,6 +23,7 @@ export function configurePassport(app: Application) {
     new PassportLocal.Strategy(
       {
         usernameField: "email",
+        session: false,
       },
       async (email, password, done) => {
         try {

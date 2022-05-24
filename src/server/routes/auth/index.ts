@@ -1,6 +1,5 @@
 import * as express from "express";
-import * as jwt from "jsonwebtoken";
-import * as config from "../../config/index";
+
 import * as Types from "../../../types";
 import * as DB from "../../db/UserQueries";
 import { authenticate } from "passport";

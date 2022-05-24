@@ -55,3 +55,10 @@ export interface SP_Return {
   data: Category[] | Book[] | User[];
   OkPacket: OkPacket;
 }
+
+export interface AppProps {}
+export interface BooksProps {}
+export interface SingleBookProps {}
+export interface CategoriesProps {}
+export interface SingleCategoryProps {}
+export interface LoginPageProps {}
