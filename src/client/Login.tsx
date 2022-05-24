@@ -13,7 +13,7 @@ const LoginPage = (props: Types.LoginPageProps) => {
 
   const nav = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     Fetcher.POST("/auth/login", { email, password })
       .then((data) => {

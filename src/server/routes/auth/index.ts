@@ -1,8 +1,7 @@
 import * as express from "express";
-
 import * as Types from "../../../types";
 import * as DB from "../../db/UserQueries";
-import { authenticate } from "passport";
+import * as passport from "passport";
 import { generateHash, generateToken } from "../../server_utils/Passwords";
 
 const authRouter = express.Router();
@@ -10,12 +9,12 @@ const authRouter = express.Router();
 // current route is "/auth"
 
 // check if a token is valid
-authRouter.get("/verify", authenticate("jwt"), (req, res, next) => {
+authRouter.get("/verify", passport.authenticate("jwt"), (req, res, next) => {
   res.status(200).json({ message: `Valid Token` });
 });
 
 // login an existing user
-authRouter.post("/login", authenticate("local"), (req: Types.ReqUser, res, next) => {
+authRouter.post("/login", passport.authenticate("local"), (req: Types.ReqUser, res, next) => {
   try {
     const token = generateToken(req.user.id, req.user.email, req.user.role, req.user.name);
     res.json(token);

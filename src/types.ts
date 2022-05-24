@@ -62,3 +62,7 @@ export interface SingleBookProps {}
 export interface CategoriesProps {}
 export interface SingleCategoryProps {}
 export interface LoginPageProps {}
+
+export interface FetchData {
+  [key: string]: string | number | boolean;
+}

@@ -1,8 +1,9 @@
 // data parameter defaults to false if nothing is provided
+import * as Types from "../../types";
 
 export const TOKEN_KEY = `token`;
 
-const Fetcher = async (url, method, data = false) => {
+const Fetcher = async (url: string, method: string, data?: Types.FetchData) => {
   // token is any JWT token in localStorage
   const token = localStorage.getItem(`token`);
 
@@ -52,10 +53,10 @@ const Fetcher = async (url, method, data = false) => {
 };
 
 // Abstract Fetcher for get, post, put, delete methods
-export const GET = (url) => Fetcher(url, "GET");
-export const POST = (url, data) => Fetcher(url, "POST", data);
-export const PUT = (url, data) => Fetcher(url, "PUT", data);
-export const DELETE = (url) => Fetcher(url, "DELETE");
+export const GET = (url: string) => Fetcher(url, "GET");
+export const POST = (url: string, data: Types.FetchData) => Fetcher(url, "POST", data);
+export const PUT = (url: string, data: Types.FetchData) => Fetcher(url, "PUT", data);
+export const DELETE = (url: string) => Fetcher(url, "DELETE");
 
 /**
  * Must use a .catch after every Fetcher call an error could potentially be thrown
