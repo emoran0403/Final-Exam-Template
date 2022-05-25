@@ -1,4 +1,5 @@
 USE final_exam_schema;
+select user from mysql.db where db='final_exam_schema';
 
 CREATE TABLE `Categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as DB from "../../db";
+import * as Types from "../../../types";
 
 const categoryRouter = express.Router();
 
@@ -8,7 +9,7 @@ const categoryRouter = express.Router();
 // get all categories
 categoryRouter.get("/", async (req, res, next) => {
   try {
-    const data = await DB.Categories.getAllCategories;
+    const [data, metaData] = await DB.Categories.getAllCategories();
     res.status(200).json(data);
   } catch (error) {
     console.log(`Error...\n`);
@@ -21,8 +22,12 @@ categoryRouter.get("/", async (req, res, next) => {
 categoryRouter.get("/:id", async (req, res, next) => {
   const id = Number(req.params.id);
   try {
-    const data = await DB.Categories.getSingleCategory(id);
-    res.status(200).json(data);
+    const [data, metaData] = await DB.Categories.getSingleCategory(id);
+    if (data.length) {
+      res.status(200).json(data);
+    } else {
+      res.status(404).json({ message: `that category was not found` });
+    }
   } catch (error) {
     console.log(`Error...\n`);
     console.error(error);

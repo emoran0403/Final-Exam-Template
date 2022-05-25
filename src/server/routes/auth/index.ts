@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as Types from "../../../types";
-import * as DB from "../../db/UserQueries";
+// import * as DB from "../../db/UserQueries";
+import * as DB from "../../db";
 import * as passport from "passport";
 import { generateHash, generateToken } from "../../server_utils/Passwords";
 
@@ -29,10 +30,10 @@ authRouter.post("/register", async (req, res, next) => {
   const newUser = req.body;
   try {
     newUser.password = generateHash(newUser.password);
-    const result = await DB.default.insertNewUser(newUser);
+    const results = await DB.Users.insertNewUser(newUser);
 
-    if (result.OkPacket.affectedRows) {
-      const token = generateToken(result.OkPacket.insertId, newUser.email, newUser.role, newUser.name);
+    if (results.affectedRows) {
+      const token = generateToken(results.insertId, newUser.email, newUser.role, newUser.name);
       res.json(token);
     } else {
       res.status(400).json({ message: "Duplicate email" });

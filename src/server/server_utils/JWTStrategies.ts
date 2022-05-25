@@ -27,9 +27,9 @@ export function configurePassport(app: Application) {
       },
       async (email, password, done) => {
         try {
-          const [userFound] = await DB.Users.getSingleUserAUTH(email);
-          if (userFound && compareHash(password, userFound.password)) {
-            delete userFound.password;
+          const [userFound, metaData] = await DB.Users.getSingleUserAUTH(email);
+          if (userFound.length && compareHash(password, userFound[0].password)) {
+            delete userFound[0].password;
             done(null, userFound);
           } else {
             done(null, false);

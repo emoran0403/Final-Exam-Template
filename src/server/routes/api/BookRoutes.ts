@@ -8,12 +8,12 @@ const bookRouter = express.Router();
 // get all books
 bookRouter.get("/", async (req, res, next) => {
   try {
-    const data = await DB.Books.getAllBooks;
+    const [data, metaData] = await DB.Books.getAllBooks();
     res.status(200).json(data);
   } catch (error) {
     console.log(`get all books error...\m`);
     console.error(error);
-    res.status(404).json({ message: `my message here` });
+    res.status(404).json({ message: `Could not get all books` });
   }
 });
 
@@ -21,12 +21,16 @@ bookRouter.get("/", async (req, res, next) => {
 bookRouter.get("/:id", async (req, res, next) => {
   const id = Number(req.params.id);
   try {
-    const data = await DB.Books.getSingleBook(id);
-    res.status(200).json(data);
+    const [data, metaData] = await DB.Books.getSingleBook(id);
+    if (data.length) {
+      res.status(200).json(data);
+    } else {
+      res.status(404).json({ message: `the book with id: ${id} does not exist` });
+    }
   } catch (error) {
     console.log(`get all books error...\m`);
     console.error(error);
-    res.status(404).json({ message: `my message here` });
+    res.status(404).json({ message: `couldnot look up the book with id: ${id}` });
   }
 });
 
@@ -56,10 +60,10 @@ bookRouter.put("/:id", async (req, res, next) => {
     let { title, author, price, categoryid } = req.body; // destructure
     const newBookInfo = { title, author, price, categoryid }; // repackage
     const results = await DB.Books.updateBook(Number(id), newBookInfo); // query
-    if (results.affectedRows) {
+    if (results.changedRows) {
       res.status(200).json({ message: `Book Updated!` }); // on success
     } else {
-      res.status(400).json({ message: `Book Not Updated!` }); // on failure
+      res.status(400).json({ message: `the book with id ${id} was not updated` }); // on failure
     }
   } catch (error) {
     console.log(`Update Book Error incoming...\n`);
@@ -72,12 +76,10 @@ bookRouter.put("/:id", async (req, res, next) => {
 bookRouter.delete("/:id", async (req, res, next) => {
   const id = Number(req.params.id);
   try {
-    const results = await DB.Books.deleteBook(id);
-    if (results.affectedRows) {
-      res.status(200).json({ message: `Book Deleted!` }); // on success
-    } else {
-      res.status(400).json({ message: `Book Not Deleted!` }); // on failure
-    }
+    await DB.Books.deleteBook(id);
+    // neither data, nor metaData come back as defined
+
+    res.status(200).json({ message: `Book Deleted!` }); // on success
   } catch (error) {
     console.log(`Error incoming...\n`);
     console.log(error);

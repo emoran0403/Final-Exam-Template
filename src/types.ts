@@ -19,10 +19,10 @@ export interface Book {
 
 export interface NewBookInfo {
   id?: number; // int(11)
+  categoryid: number; // int(11)
   title: string; // varchar(100)
   author: string; // varchar(100)
   price: number; // decimal(5,2)
-  categoryid: number; // int(11)
 }
 // All optional so that I use this to extend Request to make ReqUser
 export interface User {
@@ -50,12 +50,6 @@ export interface ReqUser extends Request {
   user?: User | Payload;
 }
 
-//! not quite sure on this guy
-export interface SP_Return {
-  data: Category[] | Book[] | User[];
-  OkPacket: OkPacket;
-}
-
 export interface AppProps {}
 export interface BooksProps {}
 export interface SingleBookProps {}
@@ -66,3 +60,7 @@ export interface LoginPageProps {}
 export interface FetchData {
   [key: string]: string | number | boolean;
 }
+
+export type SPCategory = [Category[], OkPacket];
+export type SPBook = [Book[], OkPacket];
+export type SPUser = [User[], OkPacket];

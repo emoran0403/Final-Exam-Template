@@ -54,8 +54,8 @@ const LoginPage = (props: Types.LoginPageProps) => {
   return (
     <>
       <h3>Please login, or click the new user button</h3>
-      {!isNewUser && inputForExistingUser}
-      {isNewUser && inputForNewUser}
+      {!isNewUser && inputForExistingUser()}
+      {isNewUser && inputForNewUser()}
       <button
         onClick={() => {
           setIsNewUser(true);
