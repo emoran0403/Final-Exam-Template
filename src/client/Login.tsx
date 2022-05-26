@@ -15,21 +15,40 @@ const LoginPage = (props: Types.LoginPageProps) => {
 
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    Fetcher.POST("/auth/login", { email, password })
-      .then((data) => {
-        // console.log({ data });
-        if (data) {
-          localStorage.setItem(TOKEN_KEY, data);
-          nav(`/books`);
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch((error) => {
-        console.log(`Login Error...\n`);
-        console.error(error);
-        alert(`Something went wrong, please try again`);
-      });
+
+    if (isNewUser) {
+      Fetcher.POST("/auth/register", { email, password, name })
+        .then((data) => {
+          // console.log({ data });
+          if (data) {
+            localStorage.setItem(TOKEN_KEY, data);
+            nav(`/books`);
+          } else {
+            alert(data.message);
+          }
+        })
+        .catch((error) => {
+          console.log(`register Error...\n`);
+          console.error(error);
+          alert(`Something went wrong, please try again`);
+        });
+    } else {
+      Fetcher.POST("/auth/login", { email, password })
+        .then((data) => {
+          // console.log({ data });
+          if (data) {
+            localStorage.setItem(TOKEN_KEY, data);
+            nav(`/books`);
+          } else {
+            alert(data.message);
+          }
+        })
+        .catch((error) => {
+          console.log(`Login Error...\n`);
+          console.error(error);
+          alert(`Something went wrong, please try again`);
+        });
+    }
   };
 
   const inputForExistingUser = () => {

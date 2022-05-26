@@ -17,7 +17,7 @@ authRouter.get("/verify", passport.authenticate("jwt"), (req, res, next) => {
 // login an existing user
 authRouter.post("/login", passport.authenticate("local"), (req: Types.ReqUser, res, next) => {
   try {
-    const token = generateToken(req.user.id, req.user.email, req.user.role, req.user.name);
+    const token = generateToken(req.user.id, req.user.email, req.user.name);
     res.json(token);
   } catch (error) {
     console.log(`Login Error...\n`);
@@ -33,7 +33,7 @@ authRouter.post("/register", async (req, res, next) => {
     const results = await DB.Users.insertNewUser(newUser);
 
     if (results.affectedRows) {
-      const token = generateToken(results.insertId, newUser.email, newUser.role, newUser.name);
+      const token = generateToken(results.insertId, newUser.email, newUser.name);
       res.json(token);
     } else {
       res.status(400).json({ message: "Duplicate email" });

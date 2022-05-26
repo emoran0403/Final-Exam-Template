@@ -42,6 +42,7 @@ export interface NewUserInfo {
   email: string; // varchar(60)
   password: string; // varchar(60)
   name: string; // varchar(60)
+  role: string; // varchar(25)
 }
 
 export interface Payload {
