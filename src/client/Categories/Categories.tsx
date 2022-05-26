@@ -24,7 +24,7 @@ const Categories = (props: Types.CategoriesProps) => {
         <div key={category.id}>
           <div>Title" {category.name}</div>
 
-          <button onClick={() => nav(`/categories${category.id}`, { state: { ...category } })}>See Details</button>
+          <button onClick={() => nav(`/categories/${category.id}`, { state: { ...category } })}>See Details</button>
         </div>
       ))}
     </div>

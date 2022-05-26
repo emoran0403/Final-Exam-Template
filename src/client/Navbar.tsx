@@ -16,8 +16,9 @@ const Navbar = () => {
     // if (!PublicPages.includes(loc.pathname)) {
     Fetcher.GET("/auth/verify")
       .then((data) => {
+        console.log(`navbar is working??`);
         console.log(data);
-        if (data.message === `valid token!`) setloggedIn(true);
+        if (data.message === "Valid Token") setloggedIn(true);
       })
       .catch((error) => {
         setloggedIn(false);

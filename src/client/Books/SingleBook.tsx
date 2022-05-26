@@ -93,6 +93,13 @@ const SingleBook = (props: Types.SingleBookProps) => {
     <div>
       {isEditing && isEditingBook()}
       {!isEditing && isNOTEditingBook()}
+      <button
+        onClick={() => {
+          nav("/books");
+        }}
+      >
+        Back to all Books
+      </button>
     </div>
   );
 };
