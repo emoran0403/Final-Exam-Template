@@ -8,7 +8,7 @@ const Categories = (props: Types.CategoriesProps) => {
   const [categoriesArray, setCategoriesArray] = useState<Types.Category[]>([]);
 
   const nav = useNavigate();
-
+  console.log(`we are on categories`);
   useEffect(() => {
     Fetcher.GET("/api/categories")
       .then((categories) => setCategoriesArray(categories))
@@ -19,7 +19,7 @@ const Categories = (props: Types.CategoriesProps) => {
   }, []);
 
   return (
-    <>
+    <div>
       {categoriesArray.map((category) => (
         <div key={category.id}>
           <div>Title" {category.name}</div>
@@ -27,7 +27,7 @@ const Categories = (props: Types.CategoriesProps) => {
           <button onClick={() => nav(`/categories${category.id}`, { state: { ...category } })}>See Details</button>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

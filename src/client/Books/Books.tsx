@@ -22,7 +22,7 @@ const Books = (props: Types.BooksProps) => {
   }, []);
 
   return (
-    <>
+    <div>
       {booksArray.map((book) => (
         <div key={book.id}>
           <div>Title" {book.title}</div>
@@ -32,7 +32,7 @@ const Books = (props: Types.BooksProps) => {
           <button onClick={() => nav(`/books/${book.id}`, { state: { ...book } })}>See Details</button>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

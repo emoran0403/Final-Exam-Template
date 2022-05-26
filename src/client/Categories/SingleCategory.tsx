@@ -12,7 +12,7 @@ const SingleCategory = (props: Types.SingleCategoryProps) => {
   useEffect(() => {}, []);
 
   return (
-    <>
+    <div>
       <div>
         You are viewing the {CATEGORY.name} genre, whose id is: {CATEGORY.id}
       </div>
@@ -23,7 +23,7 @@ const SingleCategory = (props: Types.SingleCategoryProps) => {
       >
         Back to all categories
       </button>
-    </>
+    </div>
   );
 };
 

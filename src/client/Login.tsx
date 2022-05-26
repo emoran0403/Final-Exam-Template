@@ -34,25 +34,25 @@ const LoginPage = (props: Types.LoginPageProps) => {
 
   const inputForExistingUser = () => {
     return (
-      <>
+      <div>
         <input value={email} type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)}></input>
         <input value={password} type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)}></input>
-      </>
+      </div>
     );
   };
 
   const inputForNewUser = () => {
     return (
-      <>
+      <div>
         <input value={email} type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)}></input>
         <input value={password} type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)}></input>
         <input value={name} placeholder="name" onChange={(e) => setName(e.target.value)}></input>
-      </>
+      </div>
     );
   };
 
   return (
-    <>
+    <div>
       <h3>Please login, or click the new user button</h3>
       {!isNewUser && inputForExistingUser()}
       {isNewUser && inputForNewUser()}
@@ -64,7 +64,7 @@ const LoginPage = (props: Types.LoginPageProps) => {
         I am a new user
       </button>
       <button onClick={(e) => handleLogin(e)}>Login</button>
-    </>
+    </div>
   );
 };
 

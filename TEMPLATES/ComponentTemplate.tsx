@@ -9,7 +9,7 @@ const ComponentTemplate = (props: ComponentTemplateProps) => {
   const nav = useNavigate();
 
   useEffect(() => {}, []);
-  return <></>;
+  return <div></div>;
 };
 
 interface ComponentTemplateProps {}

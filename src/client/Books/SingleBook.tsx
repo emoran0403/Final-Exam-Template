@@ -38,7 +38,7 @@ const SingleBook = (props: Types.SingleBookProps) => {
 
   const isEditingBook = () => {
     return (
-      <>
+      <div>
         <input value={title} onChange={(e) => setTitle(e.target.value)}></input>
         <input value={author} onChange={(e) => setAuthor(e.target.value)}></input>
         <div>Genre: {BOOK.name}</div>
@@ -59,7 +59,7 @@ const SingleBook = (props: Types.SingleBookProps) => {
         >
           Cancel
         </button>
-      </>
+      </div>
     );
   };
   const isNOTEditingBook = () => {
@@ -90,10 +90,10 @@ const SingleBook = (props: Types.SingleBookProps) => {
   };
 
   return (
-    <>
+    <div>
       {isEditing && isEditingBook()}
       {!isEditing && isNOTEditingBook()}
-    </>
+    </div>
   );
 };
 

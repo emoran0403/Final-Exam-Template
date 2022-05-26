@@ -13,7 +13,7 @@ const App = (props: Types.AppProps) => {
   useEffect(() => {}, []);
 
   return (
-    <>
+    <div>
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<LoginPage />} />
@@ -22,7 +22,7 @@ const App = (props: Types.AppProps) => {
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/:id" element={<SingleCategory />} />
       </Routes>
-    </>
+    </div>
   );
 };
 

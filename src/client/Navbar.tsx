@@ -29,7 +29,7 @@ const Navbar = () => {
   }, [loc.pathname]);
 
   return (
-    <>
+    <div>
       {loggedIn && (
         <div className="mb-4">
           <Link to="/books">
@@ -53,7 +53,7 @@ const Navbar = () => {
           </Link>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
