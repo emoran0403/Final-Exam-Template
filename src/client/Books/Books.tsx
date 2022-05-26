@@ -11,7 +11,10 @@ const Books = (props: Types.BooksProps) => {
 
   useEffect(() => {
     Fetcher.GET("/api/books")
-      .then((books) => setBooksArray(books))
+      .then((books) => {
+        setBooksArray(books);
+        // console.log(books);
+      })
       .catch((err) => {
         console.log("Get All Books Fetcher Error...\n");
         console.error(err);
@@ -21,13 +24,13 @@ const Books = (props: Types.BooksProps) => {
   return (
     <>
       {booksArray.map((book) => (
-        <>
-          <div key={book.id}>Title" {book.title}</div>
+        <div key={book.id}>
+          <div>Title" {book.title}</div>
           <div>Written by: {book.author}</div>
-          <div>Genre: {book.categoryname}</div>
+          <div>Genre: {book.name}</div>
           <div>Sells for: {book.price}</div>
           <button onClick={() => nav(`/books/${book.id}`, { state: { ...book } })}>See Details</button>
-        </>
+        </div>
       ))}
     </>
   );

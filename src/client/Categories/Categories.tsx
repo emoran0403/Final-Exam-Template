@@ -21,11 +21,11 @@ const Categories = (props: Types.CategoriesProps) => {
   return (
     <>
       {categoriesArray.map((category) => (
-        <>
-          <div key={category.id}>Title" {category.name}</div>
+        <div key={category.id}>
+          <div>Title" {category.name}</div>
 
-          <button onClick={() => nav(`/api/categories${category.id}`, { state: { ...category } })}>See Details</button>
-        </>
+          <button onClick={() => nav(`/categories${category.id}`, { state: { ...category } })}>See Details</button>
+        </div>
       ))}
     </>
   );

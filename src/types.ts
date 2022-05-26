@@ -14,7 +14,12 @@ export interface Book {
   title: string; // varchar(100)
   author: string; // varchar(100)
   price: number; // decimal(5,2)
-  categoryname: string; // varchar(50)
+  name: string; // varchar(50)
+}
+
+export interface UpdateBookInfo {
+  title: string; // varchar(100)
+  author: string; // varchar(100)
 }
 
 export interface NewBookInfo {

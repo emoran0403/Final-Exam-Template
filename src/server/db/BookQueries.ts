@@ -7,7 +7,8 @@ const getSingleBook = async (id: number) => await Query<Types.SPBook>(`CALL getS
 
 const createBook = async (newBookInfo: Types.NewBookInfo) => await Query(`INSERT INTO Books SET ?`, [newBookInfo]);
 
-const updateBook = async (id: number, newBookInfo: Types.NewBookInfo) => await Query(`UPDATE Books SET ? WHERE id = ?`, [newBookInfo, id]);
+const updateBook = async (id: number, updateBookInfo: Types.UpdateBookInfo) =>
+  await Query(`UPDATE Books SET ? WHERE id = ?`, [updateBookInfo, id]);
 
 const deleteBook = async (id: number) => await Query<Types.SPBook>(`CALL deleteBook(?);`, [id]);
 

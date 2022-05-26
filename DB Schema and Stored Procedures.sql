@@ -1,5 +1,5 @@
 USE final_exam_schema;
-select user from mysql.db where db='final_exam_schema';
+select * from mysql.db where db='final_exam_schema';
 
 CREATE TABLE `Categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -39,6 +39,9 @@ SELECT * FROM information_schema.routines WHERE routine_type = 'PROCEDURE' AND r
 
 CREATE USER 'finalexam'@'localhost';
 GRANT ALL PRIVILEGES ON base.* TO 'finalexam'@'localhost' IDENTIFIED BY 'password';
+
+CREATE USER 'finalexam'@'localhost' IDENTIFIED BY 'passwordpassword';
+GRANT ALL ON final_exam_schema.* TO 'finalexam'@'localhost';
 
 #
 #UPDATE Books SET ? WHERE id = ?;

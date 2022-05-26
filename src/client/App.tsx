@@ -7,12 +7,14 @@ import SingleBook from "./Books/SingleBook";
 import Categories from "./Categories/Categories";
 import SingleCategory from "./Categories/SingleCategory";
 import LoginPage from "./Login";
+import Navbar from "./Navbar";
 
 const App = (props: Types.AppProps) => {
   useEffect(() => {}, []);
 
   return (
     <>
+      <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/books" element={<Books />} />

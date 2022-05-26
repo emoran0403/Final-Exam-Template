@@ -57,9 +57,9 @@ bookRouter.post("/", async (req, res, next) => {
 bookRouter.put("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
-    let { title, author, price, categoryid } = req.body; // destructure
-    const newBookInfo = { title, author, price, categoryid }; // repackage
-    const results = await DB.Books.updateBook(Number(id), newBookInfo); // query
+    let { title, author } = req.body; // destructure
+    const updateBookInfo = { title, author }; // repackage
+    const results = await DB.Books.updateBook(Number(id), updateBookInfo); // query
     if (results.changedRows) {
       res.status(200).json({ message: `Book Updated!` }); // on success
     } else {

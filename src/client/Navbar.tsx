@@ -13,18 +13,19 @@ const Navbar = () => {
   const PublicPages = [`/books`, `/categories`];
 
   useEffect(() => {
-    if (!PublicPages.includes(loc.pathname)) {
-      Fetcher.GET("/auth/verify")
-        .then((data) => {
-          if (data.message === `valid token!`) setloggedIn(true);
-        })
-        .catch((error) => {
-          setloggedIn(false);
-          console.log(`error...\n`);
-          console.error(error);
-          nav("/");
-        });
-    }
+    // if (!PublicPages.includes(loc.pathname)) {
+    Fetcher.GET("/auth/verify")
+      .then((data) => {
+        console.log(data);
+        if (data.message === `valid token!`) setloggedIn(true);
+      })
+      .catch((error) => {
+        setloggedIn(false);
+        console.log(`error...\n`);
+        console.error(error);
+        nav("/");
+      });
+    // }
   }, [loc.pathname]);
 
   return (

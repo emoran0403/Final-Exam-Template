@@ -41,7 +41,7 @@ const SingleBook = (props: Types.SingleBookProps) => {
       <>
         <input value={title} onChange={(e) => setTitle(e.target.value)}></input>
         <input value={author} onChange={(e) => setAuthor(e.target.value)}></input>
-        <div>Genre: {BOOK.categoryname}</div>
+        <div>Genre: {BOOK.name}</div>
         <div>Sells for: {BOOK.price}</div>
         <button
           onClick={() => {
@@ -64,10 +64,10 @@ const SingleBook = (props: Types.SingleBookProps) => {
   };
   const isNOTEditingBook = () => {
     return (
-      <>
+      <div>
         <div>Title" {BOOK.title}</div>
         <div>Written by: {BOOK.author}</div>
-        <div>Genre: {BOOK.categoryname}</div>
+        <div>Genre: {BOOK.name}</div>
         <div>Sells for: {BOOK.price}</div>
         <button
           onClick={() => {
@@ -85,14 +85,14 @@ const SingleBook = (props: Types.SingleBookProps) => {
         >
           Delete
         </button>
-      </>
+      </div>
     );
   };
 
   return (
     <>
       {isEditing && isEditingBook()}
-      {isEditing && isNOTEditingBook()}
+      {!isEditing && isNOTEditingBook()}
     </>
   );
 };

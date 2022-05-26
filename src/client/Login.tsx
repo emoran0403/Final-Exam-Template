@@ -18,8 +18,8 @@ const LoginPage = (props: Types.LoginPageProps) => {
     Fetcher.POST("/auth/login", { email, password })
       .then((data) => {
         // console.log({ data });
-        if (data.token) {
-          localStorage.setItem(TOKEN_KEY, data.token);
+        if (data) {
+          localStorage.setItem(TOKEN_KEY, data);
           nav(`/books`);
         } else {
           alert(data.message);
