@@ -21,6 +21,9 @@ const Allcategories = (props: Types.CategoriesProps) => {
       });
   }, []);
 
+  console.log(`this is categories array:`);
+  console.log(categoriesArray);
+
   return (
     <div>
       {categoriesArray.map((category) => {
