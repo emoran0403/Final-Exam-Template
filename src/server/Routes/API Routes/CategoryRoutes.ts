@@ -2,7 +2,7 @@
 //starting category routes
 
 import * as express from "express";
-import * as DB from "../../DB";
+import * as DB from "../../database";
 
 const categoryRouter = express.Router();
 

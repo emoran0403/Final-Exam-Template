@@ -1,7 +1,7 @@
 // this can hold the auth routes, there aren't too many
 import * as express from "express";
 import * as Types from "../../../types";
-import * as DB from "../../DB";
+import * as DB from "../../database";
 import * as passport from "passport";
 import { generateHash, generateToken } from "../../server_utils/Passwords";
 

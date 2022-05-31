@@ -1,7 +1,7 @@
 //collect all book routes here
 
 import * as express from "express";
-import * as DB from "../../DB";
+import * as DB from "../../database";
 
 const bookRouter = express.Router();
 // current routes is /api/books

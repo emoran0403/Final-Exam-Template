@@ -2,7 +2,7 @@
 import * as passport from "passport";
 import * as PassportJWT from "passport-jwt";
 import * as PassportLocal from "passport-local";
-import * as DB from "../db/index";
+import * as DB from "../database/index";
 import * as Types from "../../types";
 import * as CONFIG from "../config";
 import { Application } from "express";
