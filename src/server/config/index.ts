@@ -9,4 +9,4 @@ export const DB_CONFIG = {
   database: process.env.DB_DATABASE,
 };
 
-export const JWT_CONFIG = { jwtSecretKey: process.env.JWT_SECRET_KEY };
+export const JWT_CONFIG = { jwtSecretKey: process.env.JWT_SECRET_KEY, jwtExpireTime: process.env.JWT_EXPIRE_TIME };
