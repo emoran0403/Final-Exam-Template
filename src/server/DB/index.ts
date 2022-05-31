@@ -3,6 +3,9 @@
 import * as mysql from "mysql";
 import * as dotenv from "dotenv";
 import { DB_CONFIG } from "../config";
+import Books from "./BookQueries";
+import Categories from "./CategoryQueries";
+import Users from "./UserQueries";
 
 dotenv.config();
 
@@ -18,3 +21,5 @@ export const Query = <T = mysql.OkPacket>(query: string, values?: unknown[]) => 
     });
   });
 };
+
+export { Books, Users, Categories };
