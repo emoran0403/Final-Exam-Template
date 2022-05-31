@@ -11,7 +11,6 @@ const Allcategories = (props: Types.CategoriesProps) => {
 
   useEffect(() => {
     Fetcher.GET(`/api/categories/`)
-
       .then((category) => {
         console.log(category);
         setCategoriesArray(category);
