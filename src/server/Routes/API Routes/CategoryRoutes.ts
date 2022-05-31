@@ -20,8 +20,9 @@ categoryRouter.get("/", async (req, res) => {
 
 // get single category
 categoryRouter.get("/:id", async (req, res) => {
+  const id = Number(req.params.id);
   try {
-    const [data, metaData] = await DB.Categories.getAllCategories();
+    const [data, metaData] = await DB.Categories.getSingleCategory(id);
     if (data.length > 0) {
       res.status(200).json(data);
     } else {
