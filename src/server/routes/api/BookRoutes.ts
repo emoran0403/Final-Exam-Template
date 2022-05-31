@@ -17,23 +17,6 @@ bookRouter.get("/", async (req, res, next) => {
   }
 });
 
-// get single book
-bookRouter.get("/:id", async (req, res, next) => {
-  const id = Number(req.params.id);
-  try {
-    const [data, metaData] = await DB.Books.getSingleBook(id);
-    if (data.length) {
-      res.status(200).json(data);
-    } else {
-      res.status(404).json({ message: `the book with id: ${id} does not exist` });
-    }
-  } catch (error) {
-    console.log(`get all books error...\m`);
-    console.error(error);
-    res.status(404).json({ message: `couldnot look up the book with id: ${id}` });
-  }
-});
-
 //! not recognizing my validation node module
 //new book
 bookRouter.post("/", async (req, res, next) => {
