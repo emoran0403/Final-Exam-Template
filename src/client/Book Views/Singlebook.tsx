@@ -82,7 +82,7 @@ const SingleBook = (props: Types.SingleBookProps) => {
         </button>
         <button
           onClick={() => {
-            deleteBook;
+            deleteBook();
           }}
         >
           Delete

@@ -10,8 +10,12 @@ const Allcategories = (props: Types.CategoriesProps) => {
   const nav = useNavigate();
 
   useEffect(() => {
-    Fetcher.GET(`/api/categories`)
-      .then((category) => setCategoriesArray(category))
+    Fetcher.GET(`/api/categories/`)
+
+      .then((category) => {
+        console.log(category);
+        setCategoriesArray(category);
+      })
       .catch((err) => {
         console.log(`get all categories error...\n`);
         console.error(err);
