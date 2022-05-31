@@ -23,7 +23,7 @@ const Allcategories = (props: Types.CategoriesProps) => {
 
   return (
     <div>
-      {categoriesArray.map((category) => {
+      {categoriesArray.map((category) => (
         <div key={category.id}>
           <div>Title: {category.name}</div>
           <button
@@ -33,8 +33,8 @@ const Allcategories = (props: Types.CategoriesProps) => {
           >
             Details
           </button>
-        </div>;
-      })}
+        </div>
+      ))}
     </div>
   );
 };
